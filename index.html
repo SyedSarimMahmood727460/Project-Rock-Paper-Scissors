@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="eu">
+<head>
+    <meta charset="UTF-8">
+    <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="Header">Rock Paper Scissors</div>
+    <div class="Body">
+        <div class="left">Computer choice
+            <p id="ans1"></p>
+        </div>
+        <div class="right">Human choice
+            <p id="ans2">Waiting for your choice...</p>
+            <button onclick="getHumanChoice('Rock')">Rock</button>
+            <button onclick="getHumanChoice('Paper')">Paper</button>
+            <button onclick="getHumanChoice('Scissors')">Scissors</button>
+        </div>
+    </div>
+    <div id="result"></div>
+    <div class="button" >
+        <button onclick="againPlay()">Play Again</button>
+    </div>
+    
+
+    <script>
+        let compScore=0,humanScore=0
+        function getComputerChoice() {
+            let numb = Math.random();
+            numb = Math.floor(numb * 3);
+            if (numb === 0) {
+                return "Rock";
+            } else if (numb === 1) {
+                return "Paper";
+            } else if (numb === 2) {
+                return "Scissors";
+            }
+        }
+        function getresult(comp,human){
+            if(comp===human)
+            {
+                return "Its a tie"
+            }
+            if ((human === "Rock" && comp === "Scissors") ||
+                (human === "Paper" && comp === "Rock") ||
+                (human === "Scissors" && comp === "Paper")) 
+            {
+                return "You WIN! "+human +" beats "+comp;
+            }
+
+            return "You LOSS! "+ comp +" beats "+human;
+            
+        }
+
+        function getHumanChoice(choice) {
+            document.getElementById("ans2").textContent = choice;
+
+            let output = getComputerChoice();
+            document.getElementById("ans1").textContent = output;
+
+            let result = getresult(output,choice)
+            document.getElementById("result").textContent = result;
+
+        }
+
+        function againPlay()
+        {
+            document.getElementById("result").textContent = "";
+            document.getElementById("ans1").textContent = "";
+            document.getElementById("ans2").textContent = "Waiting for your choice...";
+        }
+
+        
+    </script>
+</body>
+</html>
